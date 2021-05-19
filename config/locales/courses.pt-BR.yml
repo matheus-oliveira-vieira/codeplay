@@ -1,0 +1,18 @@
+---
+pt-BR:
+  courses:
+    new:
+      title: 'Registrar um teste'
+    update:
+      success: 'Curso atualizado com sucesso'
+  activerecord:
+    models:
+      course: 'Curso'
+    attributes:
+      course:
+        name: 'Nome'
+        description: 'Descrição'
+        price: 'Preço'
+        code: 'Código'
+        enrollment_deadline: 'Data limite de matrícula'
+        banner: Banner

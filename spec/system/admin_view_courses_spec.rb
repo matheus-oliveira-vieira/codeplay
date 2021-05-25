@@ -29,13 +29,14 @@ describe 'Admin view courses' do
                    description: 'Um curso de Ruby on Rails',
                    code: 'RUBYONRAILS', price: 20,
                    enrollment_deadline: '20/12/2033',
-                   banner: fixture_file_upload(Rails.root.join('spec/fixtures/course.png')))
+                   #banner: fixture_file_upload(Rails.root.join('spec/fixtures/course.png'))
+                   )
 
     visit root_path
     click_on 'Cursos'
     click_on 'Ruby on Rails'
 
-    expect(page).to have_css('img[src*="course.png"]')
+    #expect(page).to have_css('img[src*="course.png"]')
     expect(page).to have_content('Ruby on Rails')
     expect(page).to have_content('Um curso de Ruby on Rails')
     expect(page).to have_content('RUBYONRAILS')

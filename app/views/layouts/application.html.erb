@@ -11,18 +11,26 @@
   </head>
 
   <body>
-  <nav> 
-    <%if user_signed_in? %>
-      <%= current_user.email %>
-      <%= link_to "Editar Perfil", edit_user_registration_path%>
-      <%=link_to 'Sair', destroy_user_session_path, method: :delete%>
-    <%else%>
-      <%= link_to 'Registrar', new_user_registration_path %>
-      <%= link_to 'Entrar', new_user_session_path %>
-    <%end%>
-  </nav>
-  <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <nav>
+      <% if user_signed_in? %>
+        <%= current_user.email %>
+        <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+        <a href="<%= root_path %>" class="" data-method="delete">Inicio</a>
+      <% else %>
+        <%= link_to 'Registrar-me', new_user_registration_path %>
+        <%= link_to 'Entrar', new_user_session_path %>
+      <% end %>
+    </nav>
+    <% if notice %>
+      <div>
+        <%= notice %>
+      </div>
+    <% end %>
+    <% if alert %>
+      <div>
+        <%= alert %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

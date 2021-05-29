@@ -1,0 +1,25 @@
+<% if course.errors.any? %>
+  <p>Foram encontrados <%= course.errors.count %> erro(s):</p>
+  <ul>
+    <% course.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= form_with model: course do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :description %>
+  <%= f.text_area :description %>
+  <%= f.label :code %>
+  <%= f.text_field :code %>
+  <%= f.label :price %>
+  <%= f.number_field :price %>
+  <%= f.label :enrollment_deadline %>
+  <%= f.date_field :enrollment_deadline %>
+  <%= f.label :instructor_id, 'Instrutor(a)' %>
+  <%= f.collection_select :instructor_id, instructors, :id, :display_name %>
+  <%= f.label :banner %>
+  <%= f.file_field :banner %>
+  <%= f.submit button_text %>
+<% end %>

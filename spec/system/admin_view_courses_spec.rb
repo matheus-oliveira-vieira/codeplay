@@ -2,13 +2,15 @@ require 'rails_helper'
 
 describe 'Admin view courses' do
   it 'successfully' do
+    instructor = Instructor.create!(name: 'Fulano Sicrano',
+                                    email: 'fulano@codeplay.com.br')
     Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
                    code: 'RUBYBASIC', price: 10,
-                   enrollment_deadline: '22/12/2033')
+                   enrollment_deadline: '22/12/2033', instructor: instructor)
     Course.create!(name: 'Ruby on Rails',
                    description: 'Um curso de Ruby on Rails',
                    code: 'RUBYONRAILS', price: 20,
-                   enrollment_deadline: '20/12/2033')
+                   enrollment_deadline: '20/12/2033', instructor: instructor)
 
     visit root_path
     click_on 'Cursos'
@@ -22,21 +24,24 @@ describe 'Admin view courses' do
   end
 
   it 'and view details' do
+    instructor = Instructor.create!(name: 'Fulano Sicrano',
+                                    email: 'fulano@codeplay.com.br')
     Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
                    code: 'RUBYBASIC', price: 10,
-                   enrollment_deadline: '22/12/2033')
+                   enrollment_deadline: '22/12/2033', instructor: instructor)
     Course.create!(name: 'Ruby on Rails',
                    description: 'Um curso de Ruby on Rails',
                    code: 'RUBYONRAILS', price: 20,
                    enrollment_deadline: '20/12/2033',
-                   #banner: fixture_file_upload(Rails.root.join('spec/fixtures/course.png'))
-                   )
+                   instructor: instructor,
+                   banner: fixture_file_upload(Rails.root.join('spec/fixtures/course.png')))
 
     visit root_path
     click_on 'Cursos'
     click_on 'Ruby on Rails'
 
-    #expect(page).to have_css('img[src*="course.png"]')
+    expect(page).to have_css('img[src*="course.png"]')
+    expect(page).to have_content('Fulano Sicrano')
     expect(page).to have_content('Ruby on Rails')
     expect(page).to have_content('Um curso de Ruby on Rails')
     expect(page).to have_content('RUBYONRAILS')
@@ -52,9 +57,11 @@ describe 'Admin view courses' do
   end
 
   it 'and return to home page' do
+    instructor = Instructor.create!(name: 'Fulano Sicrano',
+                                    email: 'fulano@codeplay.com.br')
     Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
                    code: 'RUBYBASIC', price: 10,
-                   enrollment_deadline: '22/12/2033')
+                   enrollment_deadline: '22/12/2033', instructor: instructor)
 
     visit root_path
     click_on 'Cursos'
@@ -64,9 +71,11 @@ describe 'Admin view courses' do
   end
 
   it 'and return to promotions page' do
+    instructor = Instructor.create!(name: 'Fulano Sicrano',
+                                    email: 'fulano@codeplay.com.br')
     Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
                    code: 'RUBYBASIC', price: 10,
-                   enrollment_deadline: '22/12/2033')
+                   enrollment_deadline: '22/12/2033', instructor: instructor)
 
     visit root_path
     click_on 'Cursos'

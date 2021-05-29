@@ -1,13 +1,41 @@
-<h1> <%= @course.name %> </h1>
+<% if @course.banner.attached? %>
+  <%= image_tag @course.banner %>
+<% end %>
+<h1><%= @course.name %></h1>
 <dl>
-  <dt> Descrição </dt>
-  <dd> <%= @course.description%> </dd>
-  <dt> Código </dt>
-  <dd> <%= @course.code%> </dd>
-  <dt> Preço </dt>
-  <dd> <%= number_to_currency @course.price %> </dd>
-  <dt> Data limite de matrícula </dt>
-  <dd> <%= @course.enrollment_deadline.strftime('%d/%m/%Y') %> </dd>
+  <dt><%= Course.human_attribute_name(:description) %></dt>
+  <dd><%= @course.description %></dd>
+  <dt>Código</dt>
+  <dd><%= @course.code %></dd>
+  <dt>Preço</dt>
+  <dd><%= number_to_currency @course.price %></dd>
+  <dt>Data limite de matrícula</dt>
+  <dd><%= l @course.enrollment_deadline %></dd>
+  <dt>Instrutor(a)</dt>
+  <dd><%= @course.instructor.name %></dd>
 </dl>
 
+<% if user_signed_in? %>
+  <% if current_user.courses.exclude?(@course) %>
+    <%= link_to 'Comprar', enroll_course_path, method: :post %>
+  <% end %>
+<% else %>
+  <p>Faça <%= link_to 'login', new_user_session_path %> para comprar este curso</p>
+<% end %>
+
+<%= link_to 'Editar', edit_course_path(@course) %>
+<%= link_to 'Apagar', @course, method: :delete %>
 <%= link_to 'Voltar', courses_path %>
+<%= link_to 'Registrar uma aula', new_course_lesson_path(@course) %>
+
+<div id="lessons">
+  <% if @course.lessons.empty? %>
+    <p><%= t('.empty') %></p>
+  <% end %>
+  <% @course.lessons.each do |lesson| %>
+    <div>
+      <%= link_to lesson.name, [@course, lesson] %>
+      <p><%= t('lesson.duration', count: lesson.duration) %></p>
+    </div>
+  <% end %>
+</div>

@@ -20,7 +20,7 @@ describe 'Admin registers lessons' do
     expect(page).to have_text('Aula cadastrada com sucesso')
     expect(current_path).to eq(course_path(course))
   end
-#parei em 58:41
+
   it 'and fill and fields' do
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')

@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
   root 'home#index'
-  resources :courses
+
+  devise_for :users
+
+  resources :courses do
+    resources :lessons, only: %i[show new create]
+    post 'enroll', on: :member
+    get 'my_courses', on: :collection
+  end
 end

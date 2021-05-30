@@ -1,0 +1,17 @@
+<% if lesson.errors.any? %>
+  <ul>
+    <% lesson.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: [course, lesson] do |f| %>
+  <%= f.label :name, 'Nome' %>
+  <%= f.text_field :name %>
+  <%= f.label :duration, 'Duração' %>
+  <%= f.number_field :duration, step: 1, min: 0 %>
+  <%= f.label :content, 'Conteúdo' %>
+  <%= f.text_area :content %>
+  <%= f.submit 'Cadastrar' %>
+<% end %>

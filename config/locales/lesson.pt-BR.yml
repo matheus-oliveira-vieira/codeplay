@@ -1,0 +1,14 @@
+---
+pt-BR:
+  lesson:
+    duration:
+      one: '1 minuto'
+      other: '%{count} minutos'
+  activerecord:
+    models:
+      lesson: Aula
+    attributes:
+      lesson:
+        name: Nome
+        content: Conteúdo
+        duration: Duração

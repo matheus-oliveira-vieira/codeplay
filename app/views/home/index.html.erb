@@ -2,5 +2,11 @@
 <h3>Boas vindas ao sistema de gestão de cursos e aulas</h3>
 <%= link_to 'Cursos', courses_path%>
 
+<h3>Cursos Disponíveis</h3>
+<% @courses.each do |c| %>
+  <%= link_to c.name, c %>
+  <p><%= c.description %></p>
+  <p><%= number_to_currency c.price %></p>
+<% end %>
 <!-- conteudos em https://www.treinadev.com.br/trilhas  -->
 <!-- projeto em https://github.com/TreinaDev/codeplay  parei em 22.44-->

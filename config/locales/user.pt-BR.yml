@@ -9,3 +9,7 @@ pt-BR:
       user:
         password: Senha
         password_confirmation: Confirmação de Senha
+  devise:
+    registrations:
+        new:
+          submit: Criar Conta

@@ -1,21 +1,9 @@
 class LessonsController < ApplicationController
-  before_action :set_course, only: %i[new create]
+  before_action :authenticate_student!, only: %i[show]
   before_action :set_lesson, only: %i[show]
+  before_action :user_has_enrollment, only: %i[show]
 
   def show
-  end
-
-  def new
-    @lesson = Lesson.new
-  end
-
-  def create
-    @lesson = @course.lessons.new(lesson_params)
-    if @lesson.save
-      redirect_to @course, notice: 'Aula cadastrada com sucesso'
-    else
-      render :new
-    end
   end
 
   private
@@ -24,8 +12,8 @@ class LessonsController < ApplicationController
     @lesson = Lesson.find(params[:id])
   end
 
-  def set_course
-    @course = Course.find(params[:course_id])
+  def user_has_enrollment
+    redirect_to @lesson.course unless current_student.courses.include?(@lesson.course)
   end
 
   def lesson_params

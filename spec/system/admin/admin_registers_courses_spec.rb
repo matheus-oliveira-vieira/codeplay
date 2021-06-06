@@ -12,7 +12,7 @@ describe 'Admin registers courses' do
   it 'successfully' do
     instructor = Instructor.create!(name: 'Fulano Sicrano',
                                     email: 'fulano@codeplay.com.br')
-
+    user_login
     visit root_path
     click_on 'Cursos'
     click_on 'Registrar um Curso'
@@ -37,6 +37,7 @@ describe 'Admin registers courses' do
   end
 
   it 'and attributes cannot be blank' do
+    user_login
     visit root_path
     click_on 'Cursos'
     click_on 'Registrar um Curso'
@@ -52,7 +53,7 @@ describe 'Admin registers courses' do
     Course.create!(name: 'Ruby', description: 'Um curso de Ruby',
                    code: 'RUBYBASIC', price: 10,
                    enrollment_deadline: '22/12/2033', instructor: instructor)
-
+    user_login
     visit root_path
     click_on 'Cursos'
     click_on 'Registrar um Curso'

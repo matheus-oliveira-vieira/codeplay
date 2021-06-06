@@ -1,0 +1,8 @@
+<%= link_to 'Voltar', [:admin, @lesson.course] %>
+
+<h3><%= @lesson.name %></h3>
+<p><small><%= t 'lesson.duration', count: @lesson.duration %></small></p>
+
+<div>
+  <%= @lesson.content %>
+</div>

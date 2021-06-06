@@ -15,11 +15,18 @@
   <dd><%= @course.instructor.name %></dd>
 </dl>
 
-<%= link_to 'Voltar', admin_courses_path %>
+<% if user_signed_in? %>
+  <% if current_user.courses.exclude?(@course) %>
+    <%= link_to 'Comprar', enroll_course_path, method: :post %>
+  <% end %>
+<% else %>
+  <p>Faça <%= link_to 'login', new_user_session_path %> para comprar este curso</p>
+<% end %>
 
 <%= link_to 'Editar', edit_admin_course_path(@course) %>
 <%= link_to 'Apagar', [:admin, @course], method: :delete %>
-<%= link_to 'Registrar uma aula', new_admin_course_lesson_path(@course) %>
+<%= link_to 'Voltar', admin_courses_path %>
+<%= link_to 'Registrar uma aula', new_course_lesson_path(@course) %>
 
 <div id="lessons">
   <% if @course.lessons.empty? %>
@@ -27,7 +34,7 @@
   <% end %>
   <% @course.lessons.each do |lesson| %>
     <div>
-      <%= link_to lesson.name, [:admin, @course, lesson] %>
+      <%= link_to lesson.name, [@course, lesson] %>
       <p><%= t('lesson.duration', count: lesson.duration) %></p>
     </div>
   <% end %>
